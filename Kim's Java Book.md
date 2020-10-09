@@ -236,7 +236,7 @@ public String reverseVowels(String s) {
 
 使用双指针可以很容易判断一个字符串是否是回文字符串：令一个指针从左到右遍历，一个指针从右到左遍历，这两个指针同时移动一个位置，每次都判断两个指针指向的字符是否相同，如果都相同，字符串才是具有左右对称性质的回文字符串。
 
-![68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f66636339343165632d313334622d346463642d626338362d3137303266643330353330302e676966](C:\Users\WHL\Desktop\Java\resources\68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f66636339343165632d313334622d346463642d626338362d3137303266643330353330302e676966.gif)
+![https://raw.githubusercontent.com/Whalone/JavaBook/main/Java/resources/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f64623566333061372d386266612d346563632d616235642d3734376337373831383936342e676966.gif]()
 
 本题的关键是处理删除一个字符。在使用双指针遍历字符串时，如果出现两个指针指向的字符不相等的情况，我们就试着删除一个字符，再判断删除完之后的字符串是否是回文字符串。
 
@@ -244,7 +244,7 @@ public String reverseVowels(String s) {
 
 在试着删除字符时，我们既可以删除左指针指向的字符，也可以删除右指针指向的字符。
 
-![68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f64623566333061372d386266612d346563632d616235642d3734376337373831383936342e676966](C:\Users\WHL\Desktop\Java\resources\68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f64623566333061372d386266612d346563632d616235642d3734376337373831383936342e676966.gif)
+
 
 ```java
 class Solution {
@@ -359,7 +359,7 @@ class Solution {
 
 
 
-<img src="C:\Users\WHL\Desktop\Java\resources\circularlinkedlist.png" alt="circularlinkedlist" style="zoom:50%;" />
+![](https://raw.githubusercontent.com/Whalone/JavaBook/main/Java/resources/circularlinkedlist.png)
 
 **示例 2：**
 
@@ -369,7 +369,7 @@ class Solution {
 解释：链表中有一个环，其尾部连接到第一个节点。
 ```
 
-<img src="C:\Users\WHL\Desktop\Java\resources\circularlinkedlist_test2.png" alt="circularlinkedlist_test2" style="zoom: 80%;" />
+![](https://raw.githubusercontent.com/Whalone/JavaBook/main/Java/resources/circularlinkedlist_test2.png)
 
 **示例 3：**
 
@@ -379,9 +379,7 @@ class Solution {
 解释：链表中没有环。
 ```
 
-<img src="C:\Users\WHL\Desktop\Java\resources\circularlinkedlist_test3.png" alt="circularlinkedlist_test3"  />
-
-
+![](https://raw.githubusercontent.com/Whalone/JavaBook/main/Java/resources/circularlinkedlist_test3.png)
 
 可以使用快慢指针，如果存在环，那么快慢指针必定相遇。
 
@@ -1075,13 +1073,13 @@ int intervalSchedule(int[][] intvs) {}
 
 把这个思路实现成算法的话，可以按每个区间的 end 数值升序排序，因为这样处理之后实现步骤 1 和步骤 2 都方便很多:
 
-<img src="C:\Users\WHL\Desktop\Java\resources\678752f150168fc2e53a36d30e589b76ef81a95943c018b01bef6a548bfafeeb-file_1566313617208.gif" style="zoom: 33%;" />
+<img src="https://raw.githubusercontent.com/Whalone/JavaBook/main/Java/resources/678752f150168fc2e53a36d30e589b76ef81a95943c018b01bef6a548bfafeeb-file_1566313617208.gif" style="zoom: 50%;" />
 
 现在来实现算法，对于步骤 1，由于我们预先按照 end 排了序，所以选择 x 是很容易的。关键在于，如何去除与 x 相交的区间，选择下一轮循环的 x 呢？
 
 由于我们事先排了序，不难发现所有与 x 相交的区间必然会与 x 的 end 相交；如果一个区间不想与 x 的 end 相交，它的 start 必须要大于（或等于）x 的 end：
 
-<img src="C:\Users\WHL\Desktop\Java\resources\964afe81a1f6023a4f5a337c143bf0b0ad4df9de9089d35af26c2a5974504336-file_1566313617197.jpg" style="zoom:33%;" />
+<img src="https://raw.githubusercontent.com/Whalone/JavaBook/main/Java/resources/964afe81a1f6023a4f5a337c143bf0b0ad4df9de9089d35af26c2a5974504336-file_1566313617197.jpg" style="zoom:33%;" />
 
 
 
