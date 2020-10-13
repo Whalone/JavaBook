@@ -2360,6 +2360,46 @@ class Solution {
 
 
 
+##### 24. 两两交换链表中的节点
+
+给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。
+
+**你不能只是单纯的改变节点内部的值**，而是需要实际的进行节点交换。
+
+ 
+
+**示例:**
+
+```java
+给定 1->2->3->4, 你应该返回 2->1->4->3.
+```
+
+
+
+使用递归，停止的状态的该节点为空或下个节点为空。
+
+```java
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        
+        if(head==null||head.next==null){
+            return head;
+        }
+
+        ListNode nextNode = head.next;
+        head.next = swapPairs(nextNode.next);
+        nextNode.next = head;
+
+        return nextNode;
+    }
+
+}
+```
+
+
+
+
+
 
 
 #### 剑指offer
