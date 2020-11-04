@@ -1508,6 +1508,95 @@ class Solution {
 
 
 
+
+
+#### 数据结构
+
+##### 160.相交链表
+
+编写一个程序，找到两个单链表相交的起始节点。
+
+如下面的两个链表**：**
+
+[![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png)](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png)
+
+在节点 c1 开始相交。
+
+ 
+
+**示例 1：**
+
+[![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_1.png)](https://assets.leetcode.com/uploads/2018/12/13/160_example_1.png)
+
+```
+输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3
+输出：Reference of the node with value = 8
+输入解释：相交节点的值为 8 （注意，如果两个链表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。
+```
+
+ 
+
+**示例 2：**
+
+[![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_2.png)](https://assets.leetcode.com/uploads/2018/12/13/160_example_2.png)
+
+```
+输入：intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1
+输出：Reference of the node with value = 2
+输入解释：相交节点的值为 2 （注意，如果两个链表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 [3,2,4]。在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。
+```
+
+ 
+
+**示例 3：**
+
+[![img](https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_3.png)](https://assets.leetcode.com/uploads/2018/12/13/160_example_3.png)
+
+```
+输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2
+输出：null
+输入解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。
+解释：这两个链表不相交，因此返回 null。
+```
+
+ 
+
+**注意：**
+
+- 如果两个链表没有交点，返回 `null`.
+- 在返回结果后，两个链表仍须保持原有的结构。
+- 可假定整个链表结构中没有循环。
+- 程序尽量满足 O(*n*) 时间复杂度，且仅用 O(*1*) 内存。
+
+
+
+速度不一致，总会相遇。
+
+这里巧妙一点是，在尾节点增加了一个null节点。
+
+如果相遇在null节点，则证明是没有相交。
+
+```java
+public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+    if (headA == null || headB == null) return null;
+    ListNode pA = headA, pB = headB;
+    while (pA != pB) {
+        pA = pA == null ? headB : pA.next;
+        pB = pB == null ? headA : pB.next;
+    }
+    return pA;
+}
+
+```
+
+
+
+
+
+##### 
+
+
+
 ### 每日一题
 
 #### LeetCode
@@ -2520,7 +2609,213 @@ class Solution {
 
 
 
+##### 144. 二叉树的前序遍历
 
+给定一个二叉树，返回它的 *前序* 遍历。
+
+ **示例:**
+
+```
+输入: [1,null,2,3]  
+   1
+    \
+     2
+    /
+   3 
+
+输出: [1,2,3]
+```
+
+**进阶:** 递归算法很简单，你可以通过迭代算法完成吗？
+
+
+
+遍历树都可以用递归
+
+```java
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        preorder(root,result);
+        return result;
+        
+    }
+
+    public void preorder(TreeNode root,List<Integer> result){
+        if(root==null){
+            return;
+        }
+        result.add(root.val);
+        preorder(root.left,result);
+        preorder(root.right,result);
+
+    }
+}
+```
+
+
+
+迭代就是维护一个栈
+
+```java
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<Integer>();
+        if (root == null) {
+            return res;
+        }
+
+        Deque<TreeNode> stack = new LinkedList<TreeNode>();
+        TreeNode node = root;
+        while (!stack.isEmpty() || node != null) {
+            while (node != null) {
+                res.add(node.val);
+                stack.push(node);
+                node = node.left;
+            }
+            node = stack.pop();
+            node = node.right;
+        }
+        return res;
+    }
+}
+
+```
+
+
+
+##### 129.求根节点到叶子节点数字之和
+
+给定一个二叉树，它的每个结点都存放一个 `0-9` 的数字，每条从根到叶子节点的路径都代表一个数字。
+
+例如，从根到叶子节点路径 `1->2->3` 代表数字 `123`。
+
+计算从根到叶子节点生成的所有数字之和。
+
+**说明:** 叶子节点是指没有子节点的节点。
+
+**示例 1:**
+
+```
+输入: [1,2,3]
+    1
+   / \
+  2   3
+输出: 25
+解释:
+从根到叶子节点路径 1->2 代表数字 12.
+从根到叶子节点路径 1->3 代表数字 13.
+因此，数字总和 = 12 + 13 = 25.
+```
+
+**示例 2:**
+
+```
+输入: [4,9,0,5,1]
+    4
+   / \
+  9   0
+ / \
+5   1
+输出: 1026
+解释:
+从根到叶子节点路径 4->9->5 代表数字 495.
+从根到叶子节点路径 4->9->1 代表数字 491.
+从根到叶子节点路径 4->0 代表数字 40.
+因此，数字总和 = 495 + 491 + 40 = 1026.
+```
+
+
+
+还是无敌的递归
+
+```java
+class Solution {
+    public int sumNumbers(TreeNode root) {
+        return helper(root, 0);
+    }
+
+    public int helper(TreeNode root, int i){
+        if (root == null) return 0;
+        // 这一步比较巧妙 我的做法是直接字符串拼接
+		int temp = i * 10 + root.val;
+        if (root.left == null && root.right == null)
+			return temp;
+        return helper(root.left, temp) + helper(root.right, temp);
+    }
+}
+```
+
+
+
+##### 57. 插入区间
+
+给出一个*无重叠的 ，*按照区间起始端点排序的区间列表。
+
+在列表中插入一个新的区间，你需要确保列表中的区间仍然有序且不重叠（如果有必要的话，可以合并区间）。
+
+ 
+
+**示例 1：**
+
+```
+输入：intervals = [[1,3],[6,9]], newInterval = [2,5]
+输出：[[1,5],[6,9]]
+```
+
+**示例 2：**
+
+```
+输入：intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]
+输出：[[1,2],[3,10],[12,16]]
+解释：这是因为新的区间 [4,8] 与 [3,5],[6,7],[8,10] 重叠。
+```
+
+
+
+考虑三种情况
+
+在左边 无交集
+
+在右边 无交集
+
+有交集 就求两个点
+
+```java
+class Solution {
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        int left = newInterval[0];
+        int right = newInterval[1];
+        boolean placed = false;
+        List<int[]> ansList = new ArrayList<int[]>();
+        for (int[] interval : intervals) {
+            if (interval[0] > right) {
+                // 在插入区间的右侧且无交集
+                if (!placed) {
+                    ansList.add(new int[]{left, right});
+                    placed = true;                    
+                }
+                ansList.add(interval);
+            } else if (interval[1] < left) {
+                // 在插入区间的左侧且无交集
+                ansList.add(interval);
+            } else {
+                // 与插入区间有交集，计算它们的并集
+                left = Math.min(left, interval[0]);
+                right = Math.max(right, interval[1]);
+            }
+        }
+        if (!placed) {
+            ansList.add(new int[]{left, right});
+        }
+        int[][] ans = new int[ansList.size()][2];
+        for (int i = 0; i < ansList.size(); ++i) {
+            ans[i] = ansList.get(i);
+        }
+        return ans;
+    }
+}
+```
 
 
 
@@ -2651,11 +2946,10 @@ boolean 只有两个值：true、 false，可以使用1 bit 来存储，但是�
 
 
 
-#### 基本类型
-
 基本类型都有对应的包装类型，基本类型与其对应的包装类型之间的赋值使用自动装箱与拆箱完成。
 
 ```java
 Integer x = 2;     // 装箱 调用了 Integer.valueOf(2)
 int y = x;         // 拆箱 调用了 X.intValue()
 ```
+
